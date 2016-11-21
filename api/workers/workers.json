@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "firstName": "Jose",
+    "lastName": "Robinson",
+    "birthdate": "3/9/2016",
+    "email": "jrobinson0@patch.com",
+    "department": "Legal",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/kamil_mijacz.jpg"
+  }, 
+  {
+    "id": 2,
+    "firstName": "Stephen",
+    "lastName": "Graham",
+    "birthdate": "11/24/2015",
+    "email": "sgraham1@is.gd",
+    "department": "Human Resources",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/karol_lapinski.jpg"
+  }, 
+  {
+    "id": 3,
+    "firstName": "Daniel",
+    "lastName": "Gonzales",
+    "birthdate": "7/23/2016",
+    "email": "dgonzales2@bandcamp.com",
+    "department": "Legal",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/mariusz_dobrowolski.jpg"
+  }, 
+  {
+    "id": 4,
+    "firstName": "Kathy",
+    "lastName": "Hernandez",
+    "birthdate": "8/16/2016",
+    "email": "khernandez3@purevolume.com",
+    "department": "Services",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/roman_jarmoc.jpg"
+  }, 
+  {
+    "id": 5,
+    "firstName": "Tina",
+    "lastName": "Chapman",
+    "birthdate": "12/12/2015",
+    "email": "tchapman4@ocn.ne.jp",
+    "department": "Sales",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/michal_karpowicz.jpg"
+  }, 
+  {
+    "id": 6,
+    "firstName": "Randy",
+    "lastName": "Hughes",
+    "birthdate": "12/24/2015",
+    "email": "rhughes5@usnews.com",
+    "department": "Services",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/adam_zareba.jpg"
+  }, 
+  {
+    "id": 7,
+    "firstName": "Emily",
+    "lastName": "Boyd",
+    "birthdate": "12/22/2015",
+    "email": "eboyd6@cocolog-nifty.com",
+    "department": "Marketing",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/bartosz_kraszewski.jpg"
+  }, 
+  {
+    "id": 8,
+    "firstName": "Steven",
+    "lastName": "Gibson",
+    "birthdate": "3/9/2016",
+    "email": "sgibson7@mac.com",
+    "department": "Marketing",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/filip_jurszewicz.jpg"
+  }, 
+  {
+    "id": 9,
+    "firstName": "Philip",
+    "lastName": "Wheeler",
+    "birthdate": "9/5/2016",
+    "email": "pwheeler8@google.ca",
+    "department": "Legal",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/jan_lapinski.jpg"
+  }, 
+  {
+    "id": 10,
+    "firstName": "Henry",
+    "lastName": "Gibson",
+    "birthdate": "12/18/2015",
+    "email": "hgibson9@fotki.com",
+    "department": "Human Resources",
+    "avatar": "http://softwarehut.com/wp-content/themes/sh/assets/images/team/namyslaw_szymaniuk.jpg"
+  }
+]
