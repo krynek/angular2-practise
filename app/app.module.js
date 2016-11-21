@@ -11,16 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
+var ui_router_ng2_1 = require("ui-router-ng2");
 var app_component_1 = require('./app.component');
 var worker_list_component_1 = require('./workers/worker-list.component');
+var worker_component_1 = require('./workers/worker.component');
+var workersState = { name: 'workers', url: '/workers', component: worker_list_component_1.WorkerList };
+var workerState = { name: 'worker', url: '/worker/:id', component: worker_component_1.Worker };
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
-            declarations: [app_component_1.AppComponent, worker_list_component_1.WorkerList],
-            bootstrap: [app_component_1.AppComponent]
+            imports: [
+                platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                ui_router_ng2_1.UIRouterModule.forRoot({ states: [workersState, workerState], useHash: false })
+            ],
+            declarations: [
+                app_component_1.AppComponent,
+                worker_list_component_1.WorkerList,
+                worker_component_1.Worker
+            ],
+            bootstrap: [
+                app_component_1.AppComponent
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

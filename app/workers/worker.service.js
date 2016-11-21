@@ -18,12 +18,15 @@ var WorkerService = (function () {
     function WorkerService(_http) {
         this._http = _http;
         this._workerUrl = 'api/workers/workers.json';
-        // code...
     }
     WorkerService.prototype.getWorkers = function () {
         return this._http.get(this._workerUrl)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
+    };
+    WorkerService.prototype.getWorker = function (id) {
+        return this.getWorkers()
+            .map(function (products) { return products.find(function (w) { return w.id === id; }); });
     };
     WorkerService.prototype.handleError = function (error) {
         console.error(error);

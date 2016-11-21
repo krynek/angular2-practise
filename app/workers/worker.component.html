@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="panel panel-default" *ngIf='worker'>
+		<div class="panel-header">
+			
+		</div>
+		<div class="panel-content">
+			<div class="row">
+				<div class="col-md-4">
+					<img [src]='worker.avatar'
+                         [title]='worker.firstName' >
+				</div>
+				<div class="col-md-8">
+					<p>Name: {{ worker.firstName }} {{ worker.lastName }}</p>
+					<p>Birthdate: {{ worker.birthdate }}</p>
+					<p>E-mail: {{ worker.email }}</p>
+					<p>Department: {{ worker.department }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			
+		</div>
+	</div>
+</div>

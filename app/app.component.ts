@@ -10,12 +10,12 @@ import { WorkerService } from './workers/worker.service';
 				<div class="container-fluid">
 					<a class="navbar-brand">{{ pageTitle }}</a>
 					<ul class="nav navbar-nav">
-						<li><a>Worker List</a></li>
+						<li><a uiSref='workers'>Worker List</a></li>
 					</ul>
 				</div>
 			</nav>
 		</div>
-		<worker-list></worker-list>
+		<ui-view></ui-view>
 	`,
 	providers: [ WorkerService ]
 })

@@ -13,13 +13,17 @@ export class WorkerService {
 	private _workerUrl = 'api/workers/workers.json';
 	
 	constructor(private _http: Http) {
-		// code...
 	}
 
 	getWorkers(): Observable<IWorker[]> {
 		return this._http.get(this._workerUrl)
 			.map((response: Response) => <IWorker>response.json())
 			.catch(this.handleError);
+	}
+
+	getWorker(id: number): Observable<IWorker> {
+		return this.getWorkers()
+			.map((products: IWorker[]) => products.find(w => w.id === id));
 	}
 
 	private handleError(error: Response) {

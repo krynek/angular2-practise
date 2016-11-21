@@ -17,7 +17,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n\t\t<div>\n\t\t\t<nav class=\"navbar navbar-inverse\">\n\t\t\t\t<div class=\"container-fluid\">\n\t\t\t\t\t<a class=\"navbar-brand\">{{ pageTitle }}</a>\n\t\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t\t<li><a>Worker List</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</nav>\n\t\t</div>\n\t\t<worker-list></worker-list>\n\t",
+            template: "\n\t\t<div>\n\t\t\t<nav class=\"navbar navbar-inverse\">\n\t\t\t\t<div class=\"container-fluid\">\n\t\t\t\t\t<a class=\"navbar-brand\">{{ pageTitle }}</a>\n\t\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t\t<li><a uiSref='workers'>Worker List</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</nav>\n\t\t</div>\n\t\t<ui-view></ui-view>\n\t",
             providers: [worker_service_1.WorkerService]
         }), 
         __metadata('design:paramtypes', [])
