@@ -9,20 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var worker_service_1 = require('./workers/worker.service');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.pageTitle = 'Trolololo Co.';
+var worker_service_1 = require('./worker.service');
+var WorkerList = (function () {
+    function WorkerList(_workerService) {
+        this._workerService = _workerService;
+        this.title = 'Worker list';
     }
-    AppComponent = __decorate([
+    WorkerList.prototype.ngOnInit = function () {
+        var _this = this;
+        this._workerService.getWorkers()
+            .subscribe(function (workers) { return _this.workers = workers; }, function (error) { return _this.errorMessage = error; });
+    };
+    WorkerList = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n\t\t<div>\n\t\t\t<nav class=\"navbar navbar-inverse\">\n\t\t\t\t<div class=\"container-fluid\">\n\t\t\t\t\t<a class=\"navbar-brand\">{{ pageTitle }}</a>\n\t\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t\t<li><a>Worker List</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</nav>\n\t\t</div>\n\t\t<worker-list></worker-list>\n\t",
-            providers: [worker_service_1.WorkerService]
+            selector: 'worker-list',
+            templateUrl: 'app/workers/worker-list.component.html'
         }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [worker_service_1.WorkerService])
+    ], WorkerList);
+    return WorkerList;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.WorkerList = WorkerList;
+//# sourceMappingURL=worker-list.component.js.map
