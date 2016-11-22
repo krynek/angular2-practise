@@ -11,12 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
-var ui_router_ng2_1 = require("ui-router-ng2");
+var ui_router_ng2_1 = require('ui-router-ng2');
+var router_config_1 = require('./router.config');
+// import { APP_STATES } from './app.states';
 var app_component_1 = require('./app.component');
 var worker_list_component_1 = require('./workers/worker-list.component');
-var worker_component_1 = require('./workers/worker.component');
-var workersState = { name: 'workers', url: '/workers', component: worker_list_component_1.WorkerList };
-var workerState = { name: 'worker', url: '/worker/:id', component: worker_component_1.Worker };
+var worker_detail_component_1 = require('./workers/worker-detail.component');
+var workersState = { name: 'workers', url: '/', component: worker_list_component_1.WorkerList };
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,12 +26,16 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
-                ui_router_ng2_1.UIRouterModule.forRoot({ states: [workersState, workerState], useHash: false })
+                ui_router_ng2_1.UIRouterModule.forRoot({
+                    states: [workersState],
+                    useHash: true,
+                    configClass: router_config_1.MyUIRouterConfig
+                })
             ],
             declarations: [
                 app_component_1.AppComponent,
                 worker_list_component_1.WorkerList,
-                worker_component_1.Worker
+                worker_detail_component_1.WorkerDetail
             ],
             bootstrap: [
                 app_component_1.AppComponent

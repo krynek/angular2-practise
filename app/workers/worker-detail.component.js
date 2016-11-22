@@ -11,30 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var worker_service_1 = require('./worker.service');
-var Worker = (function () {
-    function Worker(_router, _route, _workerService) {
+var WorkerDetail = (function () {
+    function WorkerDetail(_router, _route, _workerService) {
         this._router = _router;
         this._route = _route;
         this._workerService = _workerService;
     }
-    Worker.prototype.ngOnInit = function () {
+    WorkerDetail.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this._route.params.subscribe(function (params) {
             var id = +params['id'];
             _this.getWorker(id);
         });
     };
-    Worker.prototype.getWorker = function (id) {
+    WorkerDetail.prototype.getWorker = function (id) {
         var _this = this;
         this._workerService.getWorker(id).subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });
     };
-    Worker = __decorate([
+    WorkerDetail = __decorate([
         core_1.Component({
-            templateUrl: 'app/workers/worker.component.html'
+            templateUrl: 'app/workers/worker-detail.component.html'
         }), 
         __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, worker_service_1.WorkerService])
-    ], Worker);
-    return Worker;
+    ], WorkerDetail);
+    return WorkerDetail;
 }());
-exports.Worker = Worker;
-//# sourceMappingURL=worker.component.js.map
+exports.WorkerDetail = WorkerDetail;
+//# sourceMappingURL=worker-detail.component.js.map

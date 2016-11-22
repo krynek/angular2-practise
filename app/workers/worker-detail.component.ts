@@ -7,9 +7,9 @@ import { IWorker } from './worker';
 import { WorkerService } from './worker.service';
 
 @Component({
-	templateUrl: 'app/workers/worker.component.html'
+	templateUrl: 'app/workers/worker-detail.component.html'
 })
-export class Worker implements OnInit {
+export class WorkerDetail implements OnInit {
 	pageTitle: string;
 	worker: IWorker;
 	errorMessage: string;
