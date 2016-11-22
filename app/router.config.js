@@ -14,7 +14,6 @@ var MyUIRouterConfig = (function () {
     function MyUIRouterConfig(router) {
         this.router = router;
         // If no URL matches, go to the `hello` state by default
-        router.urlRouterProvider.otherwise(function () { return router.stateService.go('workers'); });
     }
     MyUIRouterConfig = __decorate([
         core_1.Injectable(), 

@@ -9,37 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var http_1 = require('@angular/http');
+var common_1 = require('@angular/common');
 var ui_router_ng2_1 = require('ui-router-ng2');
-// import { MyUIRouterConfig } from './router.config';
-// import { APP_STATES } from './app.states';
-var app_component_1 = require('./app.component');
-var home_component_1 = require('./home/home.component');
-var worker_module_1 = require('./workers/worker.module');
-var homeState = { name: 'home', url: '/', component: home_component_1.HomeComponent };
-var AppModule = (function () {
-    function AppModule() {
+var worker_list_component_1 = require('./worker-list.component');
+var worker_detail_component_1 = require('./worker-detail.component');
+var worker_service_1 = require('./worker.service');
+var worker_states_1 = require('./worker.states');
+var STATES = [worker_states_1.workersState, worker_states_1.workerState];
+var WorkerModule = (function () {
+    function WorkerModule() {
     }
-    AppModule = __decorate([
+    WorkerModule = __decorate([
         core_1.NgModule({
             imports: [
-                platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                worker_module_1.WorkerModule,
-                ui_router_ng2_1.UIRouterModule.forRoot({ states: [homeState] })
+                common_1.CommonModule,
+                ui_router_ng2_1.UIRouterModule.forChild({
+                    states: STATES
+                })
             ],
             declarations: [
-                app_component_1.AppComponent,
-                home_component_1.HomeComponent
+                worker_list_component_1.WorkerList,
+                worker_detail_component_1.WorkerDetail
             ],
-            bootstrap: [
-                app_component_1.AppComponent
+            providers: [
+                worker_service_1.WorkerService
             ]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], WorkerModule);
+    return WorkerModule;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.WorkerModule = WorkerModule;
+//# sourceMappingURL=worker.module.js.map
