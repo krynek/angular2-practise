@@ -8,20 +8,22 @@ import { UIRouterModule } from 'ui-router-ng2';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { WorkerModule } from './workers/worker.module';
-
-let homeState = { name: 'home', url: '/', component: HomeComponent };
+import { APP_STATES } from "./app.states";
 
 @NgModule({
   imports: [ 
 	  BrowserModule, 
 	  HttpModule,
 	  WorkerModule,
-	  UIRouterModule.forRoot({ states: [ homeState ] })
+	  UIRouterModule.forRoot({ 
+	  	states: [ APP_STATES ],
+	  	otherwise: { state: 'app', params: {} }
+	  })
   ],
   declarations: [ 
 	  AppComponent,
-	  HomeComponent
-  ],
+	  HomeComponent 
+	],
   bootstrap: [ 
   	AppComponent 
   ]

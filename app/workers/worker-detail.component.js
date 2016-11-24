@@ -8,31 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var worker_service_1 = require('./worker.service');
 var WorkerDetail = (function () {
-    function WorkerDetail(_router, _route, _workerService) {
-        this._router = _router;
-        this._route = _route;
-        this._workerService = _workerService;
+    function WorkerDetail(detailObserver) {
+        this.detailObserver = detailObserver;
+        console.log(this);
     }
+    // constructor(private workerService: WorkerService, @Inject("workerDetail") private workerId) {
+    // 	console.log(this.workerId);
+    // }
     WorkerDetail.prototype.ngOnInit = function () {
         var _this = this;
-        this.sub = this._route.params.subscribe(function (params) {
-            var id = +params['id'];
-            _this.getWorker(id);
-        });
-    };
-    WorkerDetail.prototype.getWorker = function (id) {
-        var _this = this;
-        this._workerService.getWorker(id).subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });
+        this.detailObserver.subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });
     };
     WorkerDetail = __decorate([
         core_1.Component({
-            templateUrl: 'app/workers/worker-detail.component.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, worker_service_1.WorkerService])
+            templateUrl: 'app/workers/worker-detail.component.html',
+        }),
+        __param(0, core_1.Inject("workerDetail")), 
+        __metadata('design:paramtypes', [Object])
     ], WorkerDetail);
     return WorkerDetail;
 }());

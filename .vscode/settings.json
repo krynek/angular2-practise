@@ -1,0 +1,10 @@
+{
+    "typescript.check.workspaceVersion": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/*.js": false,
+        "**/*.js.map": true
+    },
+    "editor.tabSize": 2
+}

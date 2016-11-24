@@ -1,36 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 
 import { IWorker } from './worker';
 import { WorkerService } from './worker.service';
 
 @Component({
-	templateUrl: 'app/workers/worker-detail.component.html'
+	templateUrl: 'app/workers/worker-detail.component.html',
+	// inputs: ['workerDetail']
 })
-export class WorkerDetail implements OnInit {
-	pageTitle: string;
+export class WorkerDetail {
 	worker: IWorker;
+	workers: IWorker[];
 	errorMessage: string;
-	private sub: Subscription;
-	
-	constructor(private _router: Router,
-				private _route: ActivatedRoute,
-				private _workerService: WorkerService) {
+	constructor(@Inject("workerDetail") public detailObserver) {
+		console.log(this);
 	}
+	// constructor(private workerService: WorkerService, @Inject("workerDetail") private workerId) {
+	// 	console.log(this.workerId);
+	// }
 
 	ngOnInit(): void {
-		this.sub = this._route.params.subscribe(
-            params => {
-                let id = +params['id'];
-                this.getWorker(id);
-        });
+		this.detailObserver.subscribe(worker => this.worker = worker, error => this.errorMessage = <any>error);
 	}
 
-	getWorker(id: number) {
-        this._workerService.getWorker(id).subscribe(
-            worker => this.worker = worker,
-            error => this.errorMessage = <any>error);
-    }
+	// ngOnInit(): void {
+	// 	this.workerService.getWorker(this.workerId)
+	// 		.subscribe(worker => this.worker = worker, error => this.errorMessage = <any>error);
+	// }
 }

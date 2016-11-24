@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 		<div>
 			<nav class="navbar navbar-inverse">
 				<div class="container-fluid">
-					<a uiSref='home' class="navbar-brand">{{ pageTitle }}</a>
+					<a uiSref='app' class="navbar-brand">{{ pageTitle }}</a>
 					<ul class="nav navbar-nav">
-						<li><a uiSref='workers'>Worker List</a></li>
+						<li><a uiSref='workers' [uiOptions]="{ inherit: false }" uiSrefActive="active">Worker List</a></li>
 					</ul>
 				</div>
 			</nav>

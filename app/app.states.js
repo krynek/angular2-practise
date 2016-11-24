@@ -1,17 +1,10 @@
 "use strict";
-var worker_list_component_1 = require('./workers/worker-list.component');
-var worker_detail_component_1 = require('./workers/worker-detail.component');
+var home_component_1 = require('./home/home.component');
 exports.APP_STATES = [
     {
-        name: 'worker-list',
+        name: 'app',
         url: '/',
-        component: worker_list_component_1.WorkerList
-    },
-    {
-        name: 'worker-detail',
-        url: '/worker/:id',
-        component: worker_detail_component_1.WorkerDetail
+        component: home_component_1.HomeComponent
     }
 ];
-console.log(exports.APP_STATES);
 //# sourceMappingURL=app.states.js.map

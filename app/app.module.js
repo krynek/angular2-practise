@@ -17,7 +17,7 @@ var ui_router_ng2_1 = require('ui-router-ng2');
 var app_component_1 = require('./app.component');
 var home_component_1 = require('./home/home.component');
 var worker_module_1 = require('./workers/worker.module');
-var homeState = { name: 'home', url: '/', component: home_component_1.HomeComponent };
+var app_states_1 = require("./app.states");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,7 +27,10 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 worker_module_1.WorkerModule,
-                ui_router_ng2_1.UIRouterModule.forRoot({ states: [homeState] })
+                ui_router_ng2_1.UIRouterModule.forRoot({
+                    states: [app_states_1.APP_STATES],
+                    otherwise: { state: 'app', params: {} }
+                })
             ],
             declarations: [
                 app_component_1.AppComponent,

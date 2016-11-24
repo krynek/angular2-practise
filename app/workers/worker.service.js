@@ -26,7 +26,7 @@ var WorkerService = (function () {
     };
     WorkerService.prototype.getWorker = function (id) {
         return this.getWorkers()
-            .map(function (products) { return products.find(function (w) { return w.id === id; }); });
+            .map(function (workers) { return workers.find(function (w) { return w.id === id; }); });
     };
     WorkerService.prototype.handleError = function (error) {
         console.error(error);

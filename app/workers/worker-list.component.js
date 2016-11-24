@@ -8,24 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
-var worker_service_1 = require('./worker.service');
 var WorkerList = (function () {
-    function WorkerList(_workerService) {
-        this._workerService = _workerService;
-        this.title = 'Worker list';
+    function WorkerList(listObserver) {
+        this.listObserver = listObserver;
+        console.log(this);
     }
     WorkerList.prototype.ngOnInit = function () {
         var _this = this;
-        this._workerService.getWorkers()
-            .subscribe(function (workers) { return _this.workers = workers; }, function (error) { return _this.errorMessage = error; });
+        this.listObserver.subscribe(function (workers) { return _this.workers = workers; }, function (error) { return _this.errorMessage = error; });
     };
     WorkerList = __decorate([
         core_1.Component({
-            selector: 'worker-list',
-            templateUrl: 'app/workers/worker-list.component.html'
-        }), 
-        __metadata('design:paramtypes', [worker_service_1.WorkerService])
+            templateUrl: 'app/workers/worker-list.component.html',
+        }),
+        __param(0, core_1.Inject("workerList")), 
+        __metadata('design:paramtypes', [Object])
     ], WorkerList);
     return WorkerList;
 }());

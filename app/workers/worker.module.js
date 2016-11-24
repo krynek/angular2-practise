@@ -11,11 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var ui_router_ng2_1 = require('ui-router-ng2');
+var worker_states_1 = require('./worker.states');
 var worker_list_component_1 = require('./worker-list.component');
 var worker_detail_component_1 = require('./worker-detail.component');
+var worker_form_component_1 = require('./worker-form.component');
 var worker_service_1 = require('./worker.service');
-var worker_states_1 = require('./worker.states');
-var STATES = [worker_states_1.workersState, worker_states_1.workerState];
+// import { MyRootUIRouterConfig } from "../router.config";
 var WorkerModule = (function () {
     function WorkerModule() {
     }
@@ -24,12 +25,13 @@ var WorkerModule = (function () {
             imports: [
                 common_1.CommonModule,
                 ui_router_ng2_1.UIRouterModule.forChild({
-                    states: STATES
+                    states: worker_states_1.WORKER_STATES,
                 })
             ],
             declarations: [
                 worker_list_component_1.WorkerList,
-                worker_detail_component_1.WorkerDetail
+                worker_detail_component_1.WorkerDetail,
+                worker_form_component_1.WorkerForm
             ],
             providers: [
                 worker_service_1.WorkerService

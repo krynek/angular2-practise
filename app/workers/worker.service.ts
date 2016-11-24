@@ -23,7 +23,7 @@ export class WorkerService {
 
 	getWorker(id: number): Observable<IWorker> {
 		return this.getWorkers()
-			.map((products: IWorker[]) => products.find(w => w.id === id));
+			.map((workers: IWorker[]) => workers.find(w => w.id === id));
 	}
 
 	private handleError(error: Response) {
