@@ -17,6 +17,7 @@ import { APP_STATES } from "./app.states";
 	  WorkerModule,
 	  UIRouterModule.forRoot({ 
 	  	states: [ APP_STATES ],
+	  	useHash: true,
 	  	otherwise: { state: 'app', params: {} }
 	  })
   ],

@@ -17,9 +17,6 @@ var WorkerDetail = (function () {
         this.detailObserver = detailObserver;
         console.log(this);
     }
-    // constructor(private workerService: WorkerService, @Inject("workerDetail") private workerId) {
-    // 	console.log(this.workerId);
-    // }
     WorkerDetail.prototype.ngOnInit = function () {
         var _this = this;
         this.detailObserver.subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });

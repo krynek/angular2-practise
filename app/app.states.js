@@ -4,7 +4,10 @@ exports.APP_STATES = [
     {
         name: 'app',
         url: '/',
-        component: home_component_1.HomeComponent
+        // component: HomeComponent,
+        views: {
+            $default: { component: home_component_1.HomeComponent }
+        }
     }
 ];
 //# sourceMappingURL=app.states.js.map

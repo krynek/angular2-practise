@@ -7,6 +7,9 @@ export let APP_STATES: Ng2StateDeclaration[] = [
 	{
 		name: 'app',
 		url: '/',
-		component: HomeComponent
+		// component: HomeComponent,
+		views: {
+			$default: { component: HomeComponent }
+		}
 	}
 ];

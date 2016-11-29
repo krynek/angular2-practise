@@ -1,37 +1,108 @@
 <div class="container">
-  <div class="panel panel-default">
+  <div class="panel panel-default" [hidden]="submitted">
 		<div class="panel-header">
-      <h1>Add new worker:</h1>
+      <h3>Add new worker:</h3>
 		</div>
     <div class="panel-content">
-      <form>
+      <form #workerForm="ngForm" (ngSubmit)="onSubmit(workerForm)">
         <div class="form-group">
           <label for="firstName">First Name</label>
-          <input type="text" class="form-control" id="firstName" required>
+          <input type="text" class="form-control" id="firstName" 
+                 required
+                 [(ngModel)]="model.firstName" name="firstName"
+                 #firstName="ngModel" >
+          <div [hidden]="firstName.valid || firstName.pristine"
+               class="alert alert-danger">
+               This field is required
+          </div>
         </div>
         <div class="form-group">
           <label for="lastName">Last Name</label>
-          <input type="text" class="form-control" id="lastName" required>
+          <input type="text" class="form-control" id="lastName" 
+                required
+                [(ngModel)]="model.lastName" name="lastName"
+                #lastName="ngModel" >
+          <div [hidden]="lastName.valid || lastName.pristine" 
+               class="alert alert-danger">
+               This field is required
+          </div>
         </div>
         <div class="form-group">
           <label for="birthdate">Birthdate</label>
-          <input type="date" class="form-control" id="birthdate">
+          <input type="date" class="form-control" id="birthdate"
+                 [(ngModel)]="model.birthdate" name="birthdate"
+                 #birthdate="ngModel" >
         </div>
         <div class="form-group">
           <label for="mail">E-mail</label>
-          <input type="email" class="form-control" id="mail">
+          <input type="email" class="form-control" id="mail" 
+                 required
+                 [(ngModel)]="model.email" name="mail"
+                 #mail="ngModel" >
+          <div [hidden]="mail.valid || mail.pristine" 
+               class="alert alert-danger">
+               This field is required
+          </div>
         </div>
-        <div class="form-group">
-          <label for="department">Department</label>
-          <select class="form-control" id="department" required>
-            <option *ngFor="let deparment of departments" [value]="deparment">{{ department }}</option>
+        <div class="form-group" [class.has-error]="hasDepartmentError">
+          <label class="control-label" for="department">Department</label>
+          <select class="form-control" id="department" 
+                  (blur)="validateDepartments(department.value)"
+                  (change)="validateDepartments(department.value)"
+                  [(ngModel)]="model.department" name="department"
+                  #department >
+            <option value="default">Select a department...</option>
+            <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <div class="form-group">
+          <label for="avatar">Avatar URL</label>
+          <input type="url" class="form-control" id="avatar" 
+                 required
+                 [(ngModel)]="model.avatar" name="avatar"
+                 #avatar="ngModel" >
+          <div [hidden]="avatar.valid || avatar.pristine" 
+               class="alert alert-danger">
+               This field is required
+          </div>
+        </div>
+        <button type="submit" class="btn btn-default"
+                [disabled]="!workerForm.form.valid" >Submit</button>
       </form>
     </div>
     <div class="panel-footer">
-      <button type="submit" class="btn btn-default">
+      <button uiSref='workers' class="btn btn-default">
         <i class="glyphicon glyphicon-share-alt"></i> Back to list</button>
     </div>
+  </div>
+  <div class="panel panel-default" [hidden]="!submitted">
+    <div class="panel-header">
+      <h3>You submitted the following:</h3>
+    </div>
+    <div class="panel-content">
+      <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ model.firstName }} {{ model.lastName }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Birthday</div>
+        <div class="col-xs-9 pull-left">{{ model.birthday }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">E-mail</div>
+        <div class="col-xs-9 pull-left">{{ model.email }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Department</div>
+        <div class="col-xs-9 pull-left">{{ model.department }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Avatar</div>
+        <div class="col-xs-9"><<img [src]="model.avatar" class="img-responsive"/></div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    </div>
+  </div>
 </div>

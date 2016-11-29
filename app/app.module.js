@@ -29,6 +29,7 @@ var AppModule = (function () {
                 worker_module_1.WorkerModule,
                 ui_router_ng2_1.UIRouterModule.forRoot({
                     states: [app_states_1.APP_STATES],
+                    useHash: true,
                     otherwise: { state: 'app', params: {} }
                 })
             ],

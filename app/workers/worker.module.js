@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
+var forms_1 = require('@angular/forms');
 var ui_router_ng2_1 = require('ui-router-ng2');
 var worker_states_1 = require('./worker.states');
 var worker_list_component_1 = require('./worker-list.component');
@@ -24,6 +25,7 @@ var WorkerModule = (function () {
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
+                forms_1.FormsModule,
                 ui_router_ng2_1.UIRouterModule.forChild({
                     states: worker_states_1.WORKER_STATES,
                 })
