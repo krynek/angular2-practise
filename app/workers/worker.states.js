@@ -14,7 +14,9 @@ exports.WORKER_STATES = [
                 token: 'workerList',
                 deps: [worker_service_1.WorkerService],
                 // resolveFn: (workerSvc: WorkerService) => workerSvc.getWorkers()
-                resolveFn: function (workerSvc) { return workerSvc.getAllWorkers(); }
+                resolveFn: function (workerSvc) {
+                    return workerSvc.getAllWorkers();
+                }
             }
         ]
     },

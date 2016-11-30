@@ -10,11 +10,13 @@ import { WorkerService } from './worker.service';
 export class WorkerDetail {
 	worker: IWorker;
 	errorMessage: string;
-	constructor(@Inject("workerDetail") public detailObserver,  private _workerService: WorkerService) {
-		console.log(this);
+	constructor(@Inject("workerDetail") public detailObserver) {
 	}
 
 	ngOnInit(): void {
-		// this.detailObserver.subscribe(worker => this.worker = worker, error => this.errorMessage = <any>error);
+		this.detailObserver.subscribe(
+			worker => this.worker = worker, 
+			error => this.errorMessage = <any>error
+		);
 	}
 }

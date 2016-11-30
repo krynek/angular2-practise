@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Rx_1 = require('rxjs/Rx');
-var angularfire2_1 = require("angularfire2");
+var angularfire2_1 = require('angularfire2');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/do');
 require('rxjs/add/operator/catch');
@@ -19,19 +19,20 @@ var WorkerService = (function () {
     function WorkerService(_http, db) {
         this._http = _http;
         this.db = db;
-        this._workerUrl = 'https://angular2practise.firebaseio.com/.json';
+        this._workerUrl = 'https://angular2practise.firebaseio.com/workers.json';
     }
     WorkerService.prototype.getWorkers = function () {
         return this._http.get(this._workerUrl)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    WorkerService.prototype.getAllWorkers = function () {
-        return this.db.list('workers');
-    };
     WorkerService.prototype.getWorker = function (id) {
         return this.getWorkers()
             .map(function (workers) { return workers.find(function (w) { return w.id === id; }); });
+    };
+    // Firebase services
+    WorkerService.prototype.getAllWorkers = function () {
+        return this.db.list('workers');
     };
     WorkerService.prototype.getSingleWorker = function (id) {
         return this.db.object('workers/' + id);

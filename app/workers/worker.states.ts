@@ -16,7 +16,8 @@ export let WORKER_STATES: Ng2StateDeclaration[] = [
 				token: 'workerList',
 				deps: [ WorkerService ],
 				// resolveFn: (workerSvc: WorkerService) => workerSvc.getWorkers()
-				resolveFn: (workerSvc: WorkerService) => workerSvc.getAllWorkers()
+				resolveFn: (workerSvc: WorkerService) => 
+					workerSvc.getAllWorkers()
 			}
 		]		
 	},

@@ -12,7 +12,7 @@ import { IWorker } from './worker';
 export class WorkerList implements OnInit {
 	workers: IWorker[];
 	errorMessage: string;
-	constructor(@Inject("workerList") public listObserver, private af: AngularFire, private _workerService: WorkerService) {
+	constructor(@Inject("workerList") public listObserver, private af: AngularFire) {
 		// console.log(this);
 		// const workers$: FirebaseListObservable<IWorker[]> = af.database.list('workers');
 
@@ -24,9 +24,10 @@ export class WorkerList implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// this.listObserver.subscribe(workers => this.workers = workers, error => this.errorMessage = <any>error);
-		this._workerService.getAllWorkers()
-			.subscribe(workers => this.workers = workers, error => this.errorMessage = <any>error);
+		this.listObserver.subscribe(
+			workers => this.workers = workers, 
+			error => this.errorMessage = <any>error
+		);
 	}
 
 }
