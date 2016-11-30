@@ -13,7 +13,8 @@ exports.WORKER_STATES = [
             {
                 token: 'workerList',
                 deps: [worker_service_1.WorkerService],
-                resolveFn: function (workerSvc) { return workerSvc.getWorkers(); }
+                // resolveFn: (workerSvc: WorkerService) => workerSvc.getWorkers()
+                resolveFn: function (workerSvc) { return workerSvc.getAllWorkers(); }
             }
         ]
     },
@@ -26,7 +27,8 @@ exports.WORKER_STATES = [
                 token: 'workerDetail',
                 deps: [ui_router_ng2_1.Transition, worker_service_1.WorkerService],
                 resolveFn: function (trans, workerSvc) {
-                    return workerSvc.getWorker(+trans.params().id);
+                    // workerSvc.getWorker(+trans.params().id)
+                    return workerSvc.getSingleWorker(+trans.params().id);
                 }
             }
         ]

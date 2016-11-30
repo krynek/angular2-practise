@@ -14,7 +14,7 @@
 			<tbody>
 				<tr *ngFor='let worker of workers'>
 						<td>{{ worker.firstName }}</td>
-						<td><a uiSref='worker' [uiParams]="{ id: worker.id }">{{ worker.lastName }}</a></td>
+						<td><a uiSref='worker' [uiParams]="{ id: worker.$key }">{{ worker.lastName }}</a></td>
 						<td>{{ worker.birthdate }}
 						<td>{{ worker.email }}</td>
 						<td>{{ worker.department }}</td>

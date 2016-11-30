@@ -10,31 +10,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
+var Rx_1 = require('rxjs/Rx');
+var angularfire2_1 = require("angularfire2");
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/do');
 require('rxjs/add/operator/catch');
 var WorkerService = (function () {
-    function WorkerService(_http) {
+    function WorkerService(_http, db) {
         this._http = _http;
-        this._workerUrl = 'api/workers/workers.json';
+        this.db = db;
+        this._workerUrl = 'https://angular2practise.firebaseio.com/.json';
     }
     WorkerService.prototype.getWorkers = function () {
         return this._http.get(this._workerUrl)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    WorkerService.prototype.getAllWorkers = function () {
+        return this.db.list('workers');
+    };
     WorkerService.prototype.getWorker = function (id) {
         return this.getWorkers()
             .map(function (workers) { return workers.find(function (w) { return w.id === id; }); });
     };
+    WorkerService.prototype.getSingleWorker = function (id) {
+        return this.db.object('workers/' + id);
+    };
     WorkerService.prototype.handleError = function (error) {
         console.error(error);
-        return Observable_1.Observable.throw(error.json().error || 'Server Error');
+        return Rx_1.Observable.throw(error.json().error || 'Server Error');
     };
     WorkerService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, angularfire2_1.AngularFireDatabase])
     ], WorkerService);
     return WorkerService;
 }());

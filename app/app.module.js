@@ -12,12 +12,12 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 var ui_router_ng2_1 = require('ui-router-ng2');
-// import { MyUIRouterConfig } from './router.config';
-// import { APP_STATES } from './app.states';
+var angularfire2_1 = require('angularfire2');
 var app_component_1 = require('./app.component');
 var home_component_1 = require('./home/home.component');
 var worker_module_1 = require('./workers/worker.module');
 var app_states_1 = require("./app.states");
+var firebase_config_1 = require('./environments/firebase.config');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,7 +31,8 @@ var AppModule = (function () {
                     states: [app_states_1.APP_STATES],
                     useHash: true,
                     otherwise: { state: 'app', params: {} }
-                })
+                }),
+                angularfire2_1.AngularFireModule.initializeApp(firebase_config_1.firebaseConfig)
             ],
             declarations: [
                 app_component_1.AppComponent,

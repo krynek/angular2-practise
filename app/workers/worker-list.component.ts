@@ -1,4 +1,5 @@
 import { Component, Input, Inject, OnInit } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2'; 
 
 import { WorkerService } from './worker.service';
 import { IWorker } from './worker';
@@ -11,12 +12,21 @@ import { IWorker } from './worker';
 export class WorkerList implements OnInit {
 	workers: IWorker[];
 	errorMessage: string;
-	constructor(@Inject("workerList") public listObserver) {
-		console.log(this);
+	constructor(@Inject("workerList") public listObserver, private af: AngularFire, private _workerService: WorkerService) {
+		// console.log(this);
+		// const workers$: FirebaseListObservable<IWorker[]> = af.database.list('workers');
+
+		// workers$.subscribe(
+		// 	// console.log
+		// 	workers => this.workers = workers, 
+		// 	error => this.errorMessage = <any>error
+		// );
 	}
 
 	ngOnInit(): void {
-		this.listObserver.subscribe(workers => this.workers = workers, error => this.errorMessage = <any>error);
+		// this.listObserver.subscribe(workers => this.workers = workers, error => this.errorMessage = <any>error);
+		this._workerService.getAllWorkers()
+			.subscribe(workers => this.workers = workers, error => this.errorMessage = <any>error);
 	}
 
 }

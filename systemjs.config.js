@@ -27,7 +27,10 @@
       // other libraries
       'rxjs': 'npm:rxjs',
       'ui-router-ng2': 'https://unpkg.com/ui-router-ng2@1.0.0-beta.3/_bundles/ui-router-ng2.js',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+      'angularfire2': 'npm:angularfire2',
+      'firebase': 'npm:firebase',
+      'traceur':'npm:traceur/bin'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -37,6 +40,17 @@
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      'angularfire2': {
+        // main: './angularfire2.js',
+        main: 'bundles/angularFire2.umd.js',
+        defaultExtension: 'js'
+      },
+      'firebase': {
+        main: './firebase.js'
+      },
+      traceur:{
+        main: 'traceur'
       }
     }
   });

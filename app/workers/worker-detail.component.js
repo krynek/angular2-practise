@@ -12,21 +12,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
+var worker_service_1 = require('./worker.service');
 var WorkerDetail = (function () {
-    function WorkerDetail(detailObserver) {
+    function WorkerDetail(detailObserver, _workerService) {
         this.detailObserver = detailObserver;
+        this._workerService = _workerService;
         console.log(this);
     }
     WorkerDetail.prototype.ngOnInit = function () {
-        var _this = this;
-        this.detailObserver.subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });
+        // this.detailObserver.subscribe(worker => this.worker = worker, error => this.errorMessage = <any>error);
     };
     WorkerDetail = __decorate([
         core_1.Component({
             templateUrl: 'app/workers/worker-detail.component.html',
         }),
         __param(0, core_1.Inject("workerDetail")), 
-        __metadata('design:paramtypes', [Object])
+        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService])
     ], WorkerDetail);
     return WorkerDetail;
 }());
