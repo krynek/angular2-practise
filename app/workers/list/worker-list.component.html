@@ -9,15 +9,20 @@
 					<th>Birthdate</th>
 					<th>E-Mail</th>
 					<th>Departament</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr *ngFor='let worker of workers'>
 						<td>{{ worker.firstName }}</td>
-						<td><a uiSref='worker' [uiParams]="{ id: worker.$key }">{{ worker.lastName }}</a></td>
+						<td><a uiSref="worker" [uiParams]="{ id: worker.$key }">{{ worker.lastName }}</a></td>
 						<td>{{ worker.birthdate }}
 						<td>{{ worker.email }}</td>
 						<td>{{ worker.department }}</td>
+						<td>
+							<button (click)="removeWorker(worker.$key)"><i class="glyphicon glyphicon-remove"></i></button>
+							<button uiSref="workerEdit" [uiParams]="{ id: worker.$key }"><i class="glyphicon glyphicon-edit"></i></button>
+						</td>
 				</tr>
 			</tbody>
 		</table>

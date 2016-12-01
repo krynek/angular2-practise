@@ -8,9 +8,8 @@ export interface IWorker {
 	avatar: string;
 }
 
-export class Worker implements IWorker {
+export class Worker {
 	constructor(
-		public id: number,
 		public firstName: string,
 		public lastName: string,
 		public birthdate: string,

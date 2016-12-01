@@ -4,71 +4,52 @@
       <h3>Add new worker:</h3>
 		</div>
     <div class="panel-content">
-      <form #workerForm="ngForm" (ngSubmit)="onSubmit(workerForm)">
+      <form #form="ngForm" (submit)="submitForm(form)" novalidate>
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input type="text" class="form-control" id="firstName" 
                  required
-                 [(ngModel)]="model.firstName" name="firstName"
-                 #firstName="ngModel" >
-          <div [hidden]="firstName.valid || firstName.pristine"
-               class="alert alert-danger">
-               This field is required
-          </div>
+                 [(ngModel)]="model.firstName" name="firstName">
         </div>
         <div class="form-group">
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" id="lastName" 
                 required
-                [(ngModel)]="model.lastName" name="lastName"
-                #lastName="ngModel" >
-          <div [hidden]="lastName.valid || lastName.pristine" 
-               class="alert alert-danger">
-               This field is required
-          </div>
+                [(ngModel)]="model.lastName" name="lastName">
         </div>
         <div class="form-group">
           <label for="birthdate">Birthdate</label>
           <input type="date" class="form-control" id="birthdate"
-                 [(ngModel)]="model.birthdate" name="birthdate"
-                 #birthdate="ngModel" >
+                 [(ngModel)]="model.birthdate" name="birthdate">
         </div>
         <div class="form-group">
           <label for="mail">E-mail</label>
           <input type="email" class="form-control" id="mail" 
                  required
-                 [(ngModel)]="model.email" name="mail"
-                 #mail="ngModel" >
-          <div [hidden]="mail.valid || mail.pristine" 
-               class="alert alert-danger">
-               This field is required
-          </div>
+                 [(ngModel)]="model.email" name="mail">
         </div>
         <div class="form-group" [class.has-error]="hasDepartmentError">
           <label class="control-label" for="department">Department</label>
-          <select class="form-control" id="department" 
+          <select class="form-control" id="department" #department name="department"
                   (blur)="validateDepartments(department.value)"
                   (change)="validateDepartments(department.value)"
-                  [(ngModel)]="model.department" name="department"
-                  #department >
+                  [(ngModel)]="model.department">
             <option value="default">Select a department...</option>
-            <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+            <option *ngFor="let department of departments" [value]="model.department">{{ department }}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="avatar">Avatar URL</label>
-          <input type="url" class="form-control" id="avatar" 
+          <input type="text" class="form-control" id="avatar" 
                  required
-                 [(ngModel)]="model.avatar" name="avatar"
-                 #avatar="ngModel" >
-          <div [hidden]="avatar.valid || avatar.pristine" 
-               class="alert alert-danger">
-               This field is required
-          </div>
+                 [(ngModel)]="model.avatar" name="avatar">
         </div>
         <button type="submit" class="btn btn-default"
-                [disabled]="!workerForm.form.valid" >Submit</button>
+                [disabled]="!form.valid" >Submit</button>
       </form>
+      Model: {{ model | json }} {{ hasDepartmentError }}
+      <br>
+      Angular: {{ form.value | json }}
     </div>
     <div class="panel-footer">
       <button uiSref='workers' class="btn btn-default">
@@ -98,11 +79,12 @@
       </div>
       <div class="row">
         <div class="col-xs-3">Avatar</div>
-        <div class="col-xs-9"><<img [src]="model.avatar" class="img-responsive"/></div>
+        <div class="col-xs-9"><img [src]="model.avatar" class="img-responsive"/></div>
       </div>
     </div>
     <div class="panel-footer">
-      <button class="btn btn-default" (click)="submitted=false">Edit</button>
+      <button uiSref='workers' class="btn btn-default">
+        <i class="glyphicon glyphicon-share-alt"></i> Back to list</button>
     </div>
   </div>
 </div>

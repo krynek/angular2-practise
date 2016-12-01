@@ -37,6 +37,20 @@ var WorkerService = (function () {
     WorkerService.prototype.getSingleWorker = function (id) {
         return this.db.object('workers/' + id);
     };
+    WorkerService.prototype.addWorker = function (worker) {
+        // Get a key for a new Post.
+        var newPostKey = firebase.database().ref('workers').push().key;
+        // Add new record to the worker list.
+        var updates = {};
+        updates['/workers/' + newPostKey] = worker;
+        return firebase.database().ref().update(updates);
+    };
+    WorkerService.prototype.editWorker = function (worker, id) {
+        // Update the worker data in the worker list.
+        var updates = {};
+        updates['/workers/' + id] = worker;
+        return firebase.database().ref().update(updates);
+    };
     WorkerService.prototype.handleError = function (error) {
         console.error(error);
         return Rx_1.Observable.throw(error.json().error || 'Server Error');

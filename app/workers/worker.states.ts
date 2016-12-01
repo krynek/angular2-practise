@@ -1,9 +1,9 @@
 import { Ng2StateDeclaration, Transition } from 'ui-router-ng2';
 import {Http} from "@angular/http";
 
-import { WorkerList } from './worker-list.component';
-import { WorkerDetail } from './worker-detail.component';
-import { WorkerForm } from './worker-form.component';
+import { WorkerList } from './list/worker-list.component';
+import { WorkerDetail } from './detail/worker-detail.component';
+import { WorkerForm } from './form/worker-form.component';
 import { WorkerService } from './worker.service';
 
 export let WORKER_STATES: Ng2StateDeclaration[] = [
@@ -31,7 +31,7 @@ export let WORKER_STATES: Ng2StateDeclaration[] = [
 				deps: [ Transition, WorkerService ],
 				resolveFn: ( trans, workerSvc: WorkerService ) => 
 					// workerSvc.getWorker(+trans.params().id)
-					workerSvc.getSingleWorker(+trans.params().id)
+					workerSvc.getSingleWorker(trans.params().id)
 			}
 		]
 	},
@@ -39,5 +39,18 @@ export let WORKER_STATES: Ng2StateDeclaration[] = [
 		name: 'workerAdd',
 		url: 'worker/add',
 		component: WorkerForm,
+	},
+	{
+		name: 'workerEdit',
+		url: '/:id/edit',
+		component: WorkerForm,
+		resolve: [
+			{
+				token: 'workerEdit',
+				deps: [ Transition, WorkerService ],
+				resolveFn: ( trans, workerSvc: WorkerService ) => 
+							workerSvc.getSingleWorker(trans.params().id)
+			}
+		]
 	}
 ]

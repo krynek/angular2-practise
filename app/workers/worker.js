@@ -1,7 +1,6 @@
 "use strict";
 var Worker = (function () {
-    function Worker(id, firstName, lastName, birthdate, email, department, avatar) {
-        this.id = id;
+    function Worker(firstName, lastName, birthdate, email, department, avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;

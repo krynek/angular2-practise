@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
-import { IWorker } from './worker';
-import { WorkerService } from './worker.service';
+import { IWorker } from '../worker';
+import { WorkerService } from '../worker.service';
 
 @Component({
-	templateUrl: 'app/workers/worker-detail.component.html',
+	templateUrl: 'app/workers/detail/worker-detail.component.html',
 	// inputs: ['workerDetail']
 })
 export class WorkerDetail {

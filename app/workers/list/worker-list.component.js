@@ -12,22 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
-var WorkerDetail = (function () {
-    function WorkerDetail(detailObserver) {
-        this.detailObserver = detailObserver;
+var angularfire2_1 = require('angularfire2');
+var WorkerList = (function () {
+    function WorkerList(listObserver, af) {
+        this.listObserver = listObserver;
+        this.af = af;
+        console.log(this);
     }
-    WorkerDetail.prototype.ngOnInit = function () {
+    WorkerList.prototype.ngOnInit = function () {
         var _this = this;
-        this.detailObserver.subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });
+        this.listObserver.subscribe(function (workers) { return _this.workers = workers; }, function (error) { return _this.errorMessage = error; });
     };
-    WorkerDetail = __decorate([
+    WorkerList.prototype.removeWorker = function (id) {
+        return firebase.database().ref('workers/' + id).remove();
+    };
+    WorkerList = __decorate([
         core_1.Component({
-            templateUrl: 'app/workers/worker-detail.component.html',
+            templateUrl: 'app/workers/list/worker-list.component.html',
         }),
-        __param(0, core_1.Inject("workerDetail")), 
-        __metadata('design:paramtypes', [Object])
-    ], WorkerDetail);
-    return WorkerDetail;
+        __param(0, core_1.Inject("workerList")), 
+        __metadata('design:paramtypes', [Object, angularfire2_1.AngularFire])
+    ], WorkerList);
+    return WorkerList;
 }());
-exports.WorkerDetail = WorkerDetail;
-//# sourceMappingURL=worker-detail.component.js.map
+exports.WorkerList = WorkerList;
+//# sourceMappingURL=worker-list.component.js.map

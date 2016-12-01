@@ -12,12 +12,14 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var forms_1 = require('@angular/forms');
 var ui_router_ng2_1 = require('ui-router-ng2');
+//States
 var worker_states_1 = require('./worker.states');
-var worker_list_component_1 = require('./worker-list.component');
-var worker_detail_component_1 = require('./worker-detail.component');
-var worker_form_component_1 = require('./worker-form.component');
+//Components
+var worker_list_component_1 = require('./list/worker-list.component');
+var worker_detail_component_1 = require('./detail/worker-detail.component');
+var worker_form_component_1 = require('./form/worker-form.component');
+//Service
 var worker_service_1 = require('./worker.service');
-// import { MyRootUIRouterConfig } from "../router.config";
 var WorkerModule = (function () {
     function WorkerModule() {
     }
@@ -27,7 +29,7 @@ var WorkerModule = (function () {
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 ui_router_ng2_1.UIRouterModule.forChild({
-                    states: worker_states_1.WORKER_STATES,
+                    states: worker_states_1.WORKER_STATES
                 })
             ],
             declarations: [

@@ -32,9 +32,28 @@ export class WorkerService {
 		return this.db.list('workers')
 	}
 
-	getSingleWorker(id: number): Observable<IWorker> {
+	getSingleWorker(id: any): Observable<IWorker> {
 		return this.db.object('workers/' + id)
 	}
+
+	addWorker(worker: any) {
+		// Get a key for a new Post.
+		var newPostKey = firebase.database().ref('workers').push().key;
+
+		// Add new record to the worker list.
+		var updates = {};
+		updates['/workers/' + newPostKey] = worker;
+
+		return firebase.database().ref().update(updates);
+  }
+
+	editWorker(worker: any, id: any) {
+		// Update the worker data in the worker list.
+		var updates = {};
+		updates['/workers/' + id] = worker;
+
+		return firebase.database().ref().update(updates);
+  }
 
 	private handleError(error: Response) {
 		console.error(error);
