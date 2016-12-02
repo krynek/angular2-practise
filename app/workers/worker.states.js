@@ -45,7 +45,16 @@ exports.WORKER_STATES = [
     {
         name: 'workerEdit',
         url: '/:id/edit',
-        component: worker_form_component_1.WorkerForm
+        component: worker_form_component_1.WorkerForm,
+        resolve: [
+            {
+                token: 'workerEdit',
+                deps: [ui_router_ng2_1.Transition],
+                resolveFn: function (trans, workerSvc) {
+                    return workerSvc.getSingleWorker(trans.params().id);
+                }
+            }
+        ]
     }
 ];
 //# sourceMappingURL=worker.states.js.map

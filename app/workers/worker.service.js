@@ -41,10 +41,10 @@ var WorkerService = (function () {
         return this.db.list('workers').push(worker);
     };
     WorkerService.prototype.editWorker = function (worker, id) {
-        // return this.db.object('workers/' + id).update(worker)
-        var updates = {};
-        updates[id] = worker;
-        return firebase.database().ref('workers').update(updates);
+        // var updates = {};
+        // updates[id] = worker;
+        // return firebase.database().ref('workers').update(updates)
+        return this.db.list('workers').update(id, worker);
     };
     WorkerService.prototype.handleError = function (error) {
         console.error(error);

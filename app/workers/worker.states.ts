@@ -47,14 +47,14 @@ export let WORKER_STATES: Ng2StateDeclaration[] = [
 	{
 		name: 'workerEdit',
 		url: '/:id/edit',
-		component: WorkerForm
-		// resolve: [
-		// 	{
-		// 		token: 'workerEdit',
-		// 		deps: [ Transition ],
-		// 		resolveFn: ( trans ) => 
-		// 					trans.params().id
-		// 	}
-		// ]
+		component: WorkerForm,
+		resolve: [
+			{
+				token: 'workerEdit',
+				deps: [ Transition ],
+				resolveFn: ( trans, workerSvc: WorkerService ) => 
+							workerSvc.getSingleWorker(trans.params().id)
+			}
+		]
 	}
 ]

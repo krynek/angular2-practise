@@ -41,12 +41,13 @@ export class WorkerService {
   }
 
 	editWorker(worker: any, id: any) {
-		// return this.db.object('workers/' + id).update(worker)
+		
 
-		var updates = {};
-		updates[id] = worker;
+		// var updates = {};
+		// updates[id] = worker;
 
-		return firebase.database().ref('workers').update(updates)
+		// return firebase.database().ref('workers').update(updates)
+		return this.db.list('workers').update(id, worker)
   }
 
 	private handleError(error: Response) {

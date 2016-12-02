@@ -24,8 +24,7 @@ export class WorkerForm implements OnInit {
   test: any;
   editFlag: boolean = false;
 
-  constructor(private _workerService: WorkerService, private trans: Transition) {
-    this.currId = trans.params().id
+  constructor(@Inject('workerEdit') public editObserver, private _workerService: WorkerService) {
   }
 
 
@@ -48,7 +47,7 @@ export class WorkerForm implements OnInit {
   ngOnInit() {
     if(typeof this.currId !== 'undefined' || this.currId != null) {
       this.editFlag = true;
-      this._workerService.getSingleWorker(this.currId).subscribe(
+      this.editObserver.subscribe(
         snapshot => {
           this.model = snapshot.val(),
           this.currId = snapshot.key

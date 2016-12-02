@@ -8,20 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
-var ui_router_ng2_1 = require('ui-router-ng2');
 var worker_service_1 = require('../worker.service');
 var worker_1 = require('../worker');
 var WorkerForm = (function () {
-    function WorkerForm(_workerService, trans) {
+    function WorkerForm(editObserver, _workerService) {
+        this.editObserver = editObserver;
         this._workerService = _workerService;
-        this.trans = trans;
         this.departments = ['Human Resources', 'Legal', 'Services', 'Sales', 'Marketing'];
         this.model = new worker_1.Worker('', '', '', '', 'default', 'http://softwarehut.com/wp-content/themes/sh/assets/images/team/jan_lapinski.jpg');
         this.submitted = false;
         this.hasDepartmentError = false;
         this.editFlag = false;
-        this.currId = trans.params().id;
     }
     WorkerForm.prototype.submitForm = function (form) {
         this.submitted = true;
@@ -37,7 +38,7 @@ var WorkerForm = (function () {
         var _this = this;
         if (typeof this.currId !== 'undefined' || this.currId != null) {
             this.editFlag = true;
-            this._workerService.getSingleWorker(this.currId).subscribe(function (snapshot) {
+            this.editObserver.subscribe(function (snapshot) {
                 _this.model = snapshot.val(),
                     _this.currId = snapshot.key;
             }, function (error) { return _this.errorMessage = error; });
@@ -55,8 +56,9 @@ var WorkerForm = (function () {
             selector: 'worker-form',
             styleUrls: ['app/workers/form/worker-form.component.css'],
             templateUrl: 'app/workers/form/worker-form.component.html'
-        }), 
-        __metadata('design:paramtypes', [worker_service_1.WorkerService, ui_router_ng2_1.Transition])
+        }),
+        __param(0, core_1.Inject('workerEdit')), 
+        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService])
     ], WorkerForm);
     return WorkerForm;
 }());
