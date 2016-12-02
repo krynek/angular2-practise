@@ -16,43 +16,37 @@ export class WorkerService {
 	constructor(private _http: Http, private db: AngularFireDatabase) {
 	}
 
-	getWorkers(): Observable<IWorker[]> {
-		return this._http.get(this._workerUrl)
-			.map((response: Response) => <IWorker>response.json())
-			.catch(this.handleError);
-	}
+	// getWorkers(): Observable<IWorker[]> {
+	// 	return this._http.get(this._workerUrl)
+	// 		.map((response: Response) => <IWorker>response.json())
+	// 		.catch(this.handleError);
+	// }
 
-	getWorker(id: number): Observable<IWorker> {
-		return this.getWorkers()
-			.map((workers: IWorker[]) => workers.find(w => w.id === id));
-	}
+	// getWorker(id: number): Observable<IWorker> {
+	// 	return this.getWorkers()
+	// 		.map((workers: IWorker[]) => workers.find(w => w.id === id));
+	// }
 
 	// Firebase services
 	getAllWorkers(): Observable<IWorker[]> {
 		return this.db.list('workers')
 	}
 
-	getSingleWorker(id: any): Observable<IWorker> {
-		return this.db.object('workers/' + id)
+	getSingleWorker(id: any): Observable<any> {
+		return this.db.object('workers/' + id, { preserveSnapshot: true })
 	}
 
 	addWorker(worker: any) {
-		// Get a key for a new Post.
-		var newPostKey = firebase.database().ref('workers').push().key;
-
-		// Add new record to the worker list.
-		var updates = {};
-		updates['/workers/' + newPostKey] = worker;
-
-		return firebase.database().ref().update(updates);
+		return this.db.list('workers').push(worker);
   }
 
 	editWorker(worker: any, id: any) {
-		// Update the worker data in the worker list.
-		var updates = {};
-		updates['/workers/' + id] = worker;
+		// return this.db.object('workers/' + id).update(worker)
 
-		return firebase.database().ref().update(updates);
+		var updates = {};
+		updates[id] = worker;
+
+		return firebase.database().ref('workers').update(updates)
   }
 
 	private handleError(error: Response) {

@@ -24,7 +24,8 @@ export class WorkerList implements OnInit {
 	}
 
 	removeWorker(id: any) {
-		return firebase.database().ref('workers/' + id).remove()
+		// return firebase.database().ref('workers/' + id).remove()
+		return this.af.database.list('/items').remove(id)
 	}
 
 }

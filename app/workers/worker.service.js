@@ -21,35 +21,30 @@ var WorkerService = (function () {
         this.db = db;
         this._workerUrl = 'https://angular2practise.firebaseio.com/workers.json';
     }
-    WorkerService.prototype.getWorkers = function () {
-        return this._http.get(this._workerUrl)
-            .map(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    WorkerService.prototype.getWorker = function (id) {
-        return this.getWorkers()
-            .map(function (workers) { return workers.find(function (w) { return w.id === id; }); });
-    };
+    // getWorkers(): Observable<IWorker[]> {
+    // 	return this._http.get(this._workerUrl)
+    // 		.map((response: Response) => <IWorker>response.json())
+    // 		.catch(this.handleError);
+    // }
+    // getWorker(id: number): Observable<IWorker> {
+    // 	return this.getWorkers()
+    // 		.map((workers: IWorker[]) => workers.find(w => w.id === id));
+    // }
     // Firebase services
     WorkerService.prototype.getAllWorkers = function () {
         return this.db.list('workers');
     };
     WorkerService.prototype.getSingleWorker = function (id) {
-        return this.db.object('workers/' + id);
+        return this.db.object('workers/' + id, { preserveSnapshot: true });
     };
     WorkerService.prototype.addWorker = function (worker) {
-        // Get a key for a new Post.
-        var newPostKey = firebase.database().ref('workers').push().key;
-        // Add new record to the worker list.
-        var updates = {};
-        updates['/workers/' + newPostKey] = worker;
-        return firebase.database().ref().update(updates);
+        return this.db.list('workers').push(worker);
     };
     WorkerService.prototype.editWorker = function (worker, id) {
-        // Update the worker data in the worker list.
+        // return this.db.object('workers/' + id).update(worker)
         var updates = {};
-        updates['/workers/' + id] = worker;
-        return firebase.database().ref().update(updates);
+        updates[id] = worker;
+        return firebase.database().ref('workers').update(updates);
     };
     WorkerService.prototype.handleError = function (error) {
         console.error(error);

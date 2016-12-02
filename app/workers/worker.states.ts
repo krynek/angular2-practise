@@ -6,6 +6,10 @@ import { WorkerDetail } from './detail/worker-detail.component';
 import { WorkerForm } from './form/worker-form.component';
 import { WorkerService } from './worker.service';
 
+import { Worker } from './worker';
+
+const worker = new Worker('','','','','','');
+
 export let WORKER_STATES: Ng2StateDeclaration[] = [
 	{
 		name: 'workers',
@@ -38,19 +42,19 @@ export let WORKER_STATES: Ng2StateDeclaration[] = [
 	{
 		name: 'workerAdd',
 		url: 'worker/add',
-		component: WorkerForm,
+		component: WorkerForm
 	},
 	{
 		name: 'workerEdit',
 		url: '/:id/edit',
-		component: WorkerForm,
-		resolve: [
-			{
-				token: 'workerEdit',
-				deps: [ Transition, WorkerService ],
-				resolveFn: ( trans, workerSvc: WorkerService ) => 
-							workerSvc.getSingleWorker(trans.params().id)
-			}
-		]
+		component: WorkerForm
+		// resolve: [
+		// 	{
+		// 		token: 'workerEdit',
+		// 		deps: [ Transition ],
+		// 		resolveFn: ( trans ) => 
+		// 					trans.params().id
+		// 	}
+		// ]
 	}
 ]

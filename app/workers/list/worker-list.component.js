@@ -24,7 +24,8 @@ var WorkerList = (function () {
         this.listObserver.subscribe(function (workers) { return _this.workers = workers; }, function (error) { return _this.errorMessage = error; });
     };
     WorkerList.prototype.removeWorker = function (id) {
-        return firebase.database().ref('workers/' + id).remove();
+        // return firebase.database().ref('workers/' + id).remove()
+        return this.af.database.list('/items').remove(id);
     };
     WorkerList = __decorate([
         core_1.Component({

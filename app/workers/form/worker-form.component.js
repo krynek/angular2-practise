@@ -9,20 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var ui_router_ng2_1 = require('ui-router-ng2');
 var worker_service_1 = require('../worker.service');
 var worker_1 = require('../worker');
 var WorkerForm = (function () {
-    function WorkerForm(_workerService) {
+    function WorkerForm(_workerService, trans) {
         this._workerService = _workerService;
+        this.trans = trans;
         this.departments = ['Human Resources', 'Legal', 'Services', 'Sales', 'Marketing'];
         this.model = new worker_1.Worker('', '', '', '', 'default', 'http://softwarehut.com/wp-content/themes/sh/assets/images/team/jan_lapinski.jpg');
         this.submitted = false;
         this.hasDepartmentError = false;
+        this.editFlag = false;
+        this.currId = trans.params().id;
     }
     WorkerForm.prototype.submitForm = function (form) {
         this.submitted = true;
         console.log(form.value);
-        this._workerService.addWorker(this.model).then(function (data) { return console.log('Success'); }, function (err) { return console.log('Error'); });
+        if (this.editFlag) {
+            this._workerService.editWorker(this.model, this.currId).then(function (_) { return console.log('Success'); }, function (err) { return console.log('Error'); });
+        }
+        else {
+            this._workerService.addWorker(this.model).then(function (_) { return console.log('Success'); }, function (err) { return console.log('Error'); });
+        }
+    };
+    WorkerForm.prototype.ngOnInit = function () {
+        var _this = this;
+        if (typeof this.currId !== 'undefined' || this.currId != null) {
+            this.editFlag = true;
+            this._workerService.getSingleWorker(this.currId).subscribe(function (snapshot) {
+                _this.model = snapshot.val(),
+                    _this.currId = snapshot.key;
+            }, function (error) { return _this.errorMessage = error; });
+        }
+        console.log(this.model);
     };
     WorkerForm.prototype.validateDepartments = function (value) {
         if (value === 'default')
@@ -36,7 +56,7 @@ var WorkerForm = (function () {
             styleUrls: ['app/workers/form/worker-form.component.css'],
             templateUrl: 'app/workers/form/worker-form.component.html'
         }), 
-        __metadata('design:paramtypes', [worker_service_1.WorkerService])
+        __metadata('design:paramtypes', [worker_service_1.WorkerService, ui_router_ng2_1.Transition])
     ], WorkerForm);
     return WorkerForm;
 }());

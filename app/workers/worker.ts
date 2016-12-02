@@ -1,5 +1,5 @@
 export interface IWorker {
-	id: number;
+	$key?: string;
 	firstName: string;
 	lastName: string;
 	birthdate: string;
@@ -8,7 +8,7 @@ export interface IWorker {
 	avatar: string;
 }
 
-export class Worker {
+export class Worker implements IWorker {
 	constructor(
 		public firstName: string,
 		public lastName: string,
