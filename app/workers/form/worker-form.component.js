@@ -23,7 +23,7 @@ var WorkerForm = (function () {
      * Inject "workerEdit" (resolve data)
      * @param {Observable} editObserver
      */
-    function WorkerForm(editObserver, _workerService, trans) {
+    function WorkerForm(editObserver, _workerService, _router) {
         this.editObserver = editObserver;
         this._workerService = _workerService;
         this.departments = ['Human Resources', 'Legal', 'Services', 'Sales', 'Marketing'];
@@ -31,7 +31,7 @@ var WorkerForm = (function () {
         this.submitted = false;
         this.hasDepartmentError = false;
         this.editFlag = false;
-        this.currId = trans.params().id;
+        this.currState = _router.globals.$current.name;
     }
     /**
      * Submit form
@@ -54,7 +54,7 @@ var WorkerForm = (function () {
        */
     WorkerForm.prototype.ngOnInit = function () {
         var _this = this;
-        if (typeof this.currId !== 'undefined' || this.currId != null) {
+        if (this.currState === 'workerEdit') {
             this.editFlag = true;
             this.editObserver.subscribe(function (snapshot) {
                 _this.model = snapshot.val(),
@@ -79,7 +79,7 @@ var WorkerForm = (function () {
             templateUrl: 'app/workers/form/worker-form.component.html'
         }),
         __param(0, core_1.Inject('workerEdit')), 
-        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService, ui_router_ng2_1.Transition])
+        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService, ui_router_ng2_1.UIRouter])
     ], WorkerForm);
     return WorkerForm;
 }());

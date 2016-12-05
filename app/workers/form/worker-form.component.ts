@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Transition } from 'ui-router-ng2';
+import { UIRouter } from 'ui-router-ng2';
 
 import { WorkerService } from '../worker.service';
 import { Worker } from '../worker';
@@ -27,14 +27,15 @@ export class WorkerForm implements OnInit {
   hasDepartmentError: boolean = false;
 
   currId: any;
+  currState: string;
   editFlag: boolean = false;
   
   /**
    * Inject "workerEdit" (resolve data)
    * @param {Observable} editObserver
    */
-  constructor(@Inject('workerEdit') public editObserver, private _workerService: WorkerService, trans: Transition) {
-    this.currId = trans.params().id
+  constructor(@Inject('workerEdit') public editObserver, private _workerService: WorkerService, _router: UIRouter) {
+    this.currState = _router.globals.$current.name;
   }
 
   /**
@@ -63,7 +64,7 @@ export class WorkerForm implements OnInit {
    * Using original snapshot to get $key value 
 	 */
   ngOnInit() {
-    if(typeof this.currId !== 'undefined' || this.currId != null) {
+    if(this.currState === 'workerEdit') {
       this.editFlag = true;
       this.editObserver.subscribe(
         snapshot => {
