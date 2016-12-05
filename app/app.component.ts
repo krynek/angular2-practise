@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2'; 
 
+/**
+ * Main Component
+ */
 @Component({
 	selector: 'my-app',
 	template: `

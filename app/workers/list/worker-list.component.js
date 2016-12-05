@@ -12,27 +12,39 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
-var angularfire2_1 = require('angularfire2');
+var worker_service_1 = require('../worker.service');
+/**
+ * Worker List Component
+ */
 var WorkerList = (function () {
-    function WorkerList(listObserver, af) {
+    /**
+     * Inject "workerList" (resolve data)
+     * @param {Observable} listObserver
+     */
+    function WorkerList(listObserver, _workerService) {
         this.listObserver = listObserver;
-        this.af = af;
-        console.log(this);
+        this._workerService = _workerService;
     }
+    /**
+     * Subscribe "listObserver" to get data from Firebase
+     */
     WorkerList.prototype.ngOnInit = function () {
         var _this = this;
         this.listObserver.subscribe(function (workers) { return _this.workers = workers; }, function (error) { return _this.errorMessage = error; });
     };
+    /**
+     * Call "WorkerService" method to remove worker
+     * @param {any} id
+     */
     WorkerList.prototype.removeWorker = function (id) {
-        // return firebase.database().ref('workers/' + id).remove()
-        return this.af.database.list('/items').remove(id);
+        return this._workerService.removeWorker(id);
     };
     WorkerList = __decorate([
         core_1.Component({
-            templateUrl: 'app/workers/list/worker-list.component.html',
+            templateUrl: 'app/workers/list/worker-list.component.html'
         }),
         __param(0, core_1.Inject("workerList")), 
-        __metadata('design:paramtypes', [Object, angularfire2_1.AngularFire])
+        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService])
     ], WorkerList);
     return WorkerList;
 }());

@@ -16,36 +16,61 @@ require('rxjs/add/operator/map');
 require('rxjs/add/operator/do');
 require('rxjs/add/operator/catch');
 var WorkerService = (function () {
-    function WorkerService(_http, db) {
+    /**
+     * @constructor
+     * @param {Http} - Http Service
+     * @param {AngularFireDatabase} - AngularFire2 Database
+     */
+    function WorkerService(_http, _db) {
         this._http = _http;
-        this.db = db;
-        this._workerUrl = 'https://angular2practise.firebaseio.com/workers.json';
+        this._db = _db;
+        this.list = this._db.list('workers');
     }
-    // getWorkers(): Observable<IWorker[]> {
-    // 	return this._http.get(this._workerUrl)
-    // 		.map((response: Response) => <IWorker>response.json())
-    // 		.catch(this.handleError);
-    // }
-    // getWorker(id: number): Observable<IWorker> {
-    // 	return this.getWorkers()
-    // 		.map((workers: IWorker[]) => workers.find(w => w.id === id));
-    // }
-    // Firebase services
+    /**
+     * Get worker list
+     * @return {Observable}
+     */
     WorkerService.prototype.getAllWorkers = function () {
-        return this.db.list('workers');
+        return this.list;
     };
+    /**
+     * Get single worker
+     * @param {any} id - The $key value
+     * @return {Observable}
+     */
     WorkerService.prototype.getSingleWorker = function (id) {
-        return this.db.object('workers/' + id, { preserveSnapshot: true });
+        return this._db.object('workers/' + id, { preserveSnapshot: true });
     };
+    /**
+     * Add new worker
+     * @param {any} worker - The worker object
+     * @return {Promise}
+     */
     WorkerService.prototype.addWorker = function (worker) {
-        return this.db.list('workers').push(worker);
+        return this.list.push(worker);
     };
+    /**
+     * Edit existing worker
+     * @param {any} worker - The worker object
+     * @param {any} id - The $key value
+     * @return {Promise}
+     */
     WorkerService.prototype.editWorker = function (worker, id) {
-        // var updates = {};
-        // updates[id] = worker;
-        // return firebase.database().ref('workers').update(updates)
-        return this.db.list('workers').update(id, worker);
+        return this.list.update(id, worker);
     };
+    /**
+     * Remove worker form list
+     * @param {any} id - The $key value
+     * @return {Promise}
+     */
+    WorkerService.prototype.removeWorker = function (id) {
+        return this.list.remove(id);
+    };
+    /**
+     * Handle error
+     * @param {error}
+     * @return {Observable}
+     */
     WorkerService.prototype.handleError = function (error) {
         console.error(error);
         return Rx_1.Observable.throw(error.json().error || 'Server Error');

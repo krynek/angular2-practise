@@ -9,7 +9,7 @@ import { WORKER_STATES } from './worker.states';
 import { WorkerList } from './list/worker-list.component';
 import { WorkerDetail } from './detail/worker-detail.component';
 import { WorkerForm} from './form/worker-form.component';
-//Service
+//Services
 import { WorkerService } from './worker.service';
 
 @NgModule({
@@ -29,4 +29,7 @@ import { WorkerService } from './worker.service';
 		WorkerService
 	]
 })
+/** 
+ * @module WorkerModule
+ */
 export class WorkerModule {}

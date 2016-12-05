@@ -1,3 +1,8 @@
+/**
+ * Interface for clasess that represent a worker
+ * 
+ * @interface
+ */
 export interface IWorker {
 	$key?: string;
 	firstName: string;
@@ -7,7 +12,12 @@ export interface IWorker {
 	department: string;
 	avatar: string;
 }
-
+/**
+ * Class representing a worker.
+ * 
+ * @class
+ * @implements {IWorker}
+ */
 export class Worker implements IWorker {
 	constructor(
 		public firstName: string,

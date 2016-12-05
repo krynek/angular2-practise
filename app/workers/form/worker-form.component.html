@@ -30,12 +30,12 @@
         </div>
         <div class="form-group" [class.has-error]="hasDepartmentError">
           <label class="control-label" for="department">Department</label>
-          <select class="form-control" id="department" #department name="department"
+          <select class="form-control" id="department" name="department" #department
                   (blur)="validateDepartments(department.value)"
                   (change)="validateDepartments(department.value)"
                   [(ngModel)]="model.department">
             <option value="default">Select a department...</option>
-            <option *ngFor="let department of departments" [value]="model.department">{{ department }}</option>
+            <option *ngFor="let department of departments">{{ department }}</option>
           </select>
         </div>
         <div class="form-group">
@@ -47,11 +47,8 @@
         <button type="submit" class="btn btn-default" *ngIf="!editFlag"
                 [disabled]="!form.valid" >Submit</button>
         <button type="submit" class="btn btn-default" *ngIf="editFlag"
-                [disabled]="!form.valid" >Save changes</button>
+                [disabled]="!form.valid">Save changes</button>
       </form>
-      Model: {{ model | json }} {{ hasDepartmentError }}
-      <br>
-      Angular: {{ form.value | json }}
     </div>
     <div class="panel-footer">
       <button uiSref='workers' class="btn btn-default">

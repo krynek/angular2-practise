@@ -18,7 +18,7 @@ var worker_states_1 = require('./worker.states');
 var worker_list_component_1 = require('./list/worker-list.component');
 var worker_detail_component_1 = require('./detail/worker-detail.component');
 var worker_form_component_1 = require('./form/worker-form.component');
-//Service
+//Services
 var worker_service_1 = require('./worker.service');
 var WorkerModule = (function () {
     function WorkerModule() {

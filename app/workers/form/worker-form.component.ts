@@ -1,33 +1,47 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Transition } from 'ui-router-ng2';
 
 import { WorkerService } from '../worker.service';
 import { Worker } from '../worker';
 
+/**
+ * Worker Add/Edit Component
+ */
 @Component({
   selector: 'worker-form',
   styleUrls: [ 'app/workers/form/worker-form.component.css' ],
   templateUrl: 'app/workers/form/worker-form.component.html'
 })
+/**
+ * Class uses for Add/Edit Worker
+ */
 export class WorkerForm implements OnInit {
   errorMessage: string;
 
-  departments = [ 'Human Resources', 'Legal', 'Services', 'Sales', 'Marketing' ];
+  departments: string[] = [ 'Human Resources', 'Legal', 'Services', 'Sales', 'Marketing' ];
 
   model = new Worker('','','','','default','http://softwarehut.com/wp-content/themes/sh/assets/images/team/jan_lapinski.jpg');
 
-  submitted = false;
-  hasDepartmentError = false;
+  submitted: boolean = false;
+  hasDepartmentError: boolean = false;
 
   currId: any;
-  test: any;
   editFlag: boolean = false;
-
-  constructor(@Inject('workerEdit') public editObserver, private _workerService: WorkerService) {
+  
+  /**
+   * Inject "workerEdit" (resolve data)
+   * @param {Observable} editObserver
+   */
+  constructor(@Inject('workerEdit') public editObserver, private _workerService: WorkerService, trans: Transition) {
+    this.currId = trans.params().id
   }
 
-
+  /**
+   * Submit form 
+   * Call "WorkerService" method to add worker
+   * @param {NgForm} form
+   */
   submitForm(form: NgForm) {
   	this.submitted = true;
     console.log(form.value);
@@ -44,6 +58,10 @@ export class WorkerForm implements OnInit {
     }
   }
 
+  /**
+	 * Subscribe "editObserver" to get data from Firebase
+   * Using original snapshot to get $key value 
+	 */
   ngOnInit() {
     if(typeof this.currId !== 'undefined' || this.currId != null) {
       this.editFlag = true;
@@ -55,9 +73,12 @@ export class WorkerForm implements OnInit {
         error => this.errorMessage = <any>error
       );
     }
-    console.log(this.model);
   }
 
+  /**
+   * Validate select 
+   * @param {string} value 
+   */
   validateDepartments(value) {
     if (value === 'default')
       this.hasDepartmentError = true;

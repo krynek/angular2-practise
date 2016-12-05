@@ -12,13 +12,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
+/**
+ * Worker Detail Component
+ */
 var WorkerDetail = (function () {
+    /**
+     * Inject "workerDetail" (resolve data)
+     * @param {Observable} detailObserver
+     */
     function WorkerDetail(detailObserver) {
         this.detailObserver = detailObserver;
     }
+    /**
+     * Subscribe 'detailObserver' to get data from Firebase
+     */
     WorkerDetail.prototype.ngOnInit = function () {
         var _this = this;
-        this.detailObserver.subscribe(function (worker) { return _this.worker = worker; }, function (error) { return _this.errorMessage = error; });
+        this.detailObserver.subscribe(function (snapshot) { return _this.worker = snapshot.val(); }, function (error) { return _this.errorMessage = error; });
     };
     WorkerDetail = __decorate([
         core_1.Component({

@@ -1,4 +1,10 @@
 "use strict";
+/**
+ * Class representing a worker.
+ *
+ * @class
+ * @implements {IWorker}
+ */
 var Worker = (function () {
     function Worker(firstName, lastName, birthdate, email, department, avatar) {
         this.firstName = firstName;

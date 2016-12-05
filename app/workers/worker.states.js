@@ -4,8 +4,10 @@ var worker_list_component_1 = require('./list/worker-list.component');
 var worker_detail_component_1 = require('./detail/worker-detail.component');
 var worker_form_component_1 = require('./form/worker-form.component');
 var worker_service_1 = require('./worker.service');
-var worker_1 = require('./worker');
-var worker = new worker_1.Worker('', '', '', '', '', '');
+/**
+ * This file defines the states for the 'worker' module
+ * The states are exported as and array and imported in the WorkerModule
+ */
 exports.WORKER_STATES = [
     {
         name: 'workers',
@@ -15,7 +17,6 @@ exports.WORKER_STATES = [
             {
                 token: 'workerList',
                 deps: [worker_service_1.WorkerService],
-                // resolveFn: (workerSvc: WorkerService) => workerSvc.getWorkers()
                 resolveFn: function (workerSvc) {
                     return workerSvc.getAllWorkers();
                 }
@@ -31,7 +32,6 @@ exports.WORKER_STATES = [
                 token: 'workerDetail',
                 deps: [ui_router_ng2_1.Transition, worker_service_1.WorkerService],
                 resolveFn: function (trans, workerSvc) {
-                    // workerSvc.getWorker(+trans.params().id)
                     return workerSvc.getSingleWorker(trans.params().id);
                 }
             }
@@ -40,7 +40,7 @@ exports.WORKER_STATES = [
     {
         name: 'workerAdd',
         url: 'worker/add',
-        component: worker_form_component_1.WorkerForm
+        component: worker_form_component_1.WorkerForm,
     },
     {
         name: 'workerEdit',
@@ -49,7 +49,7 @@ exports.WORKER_STATES = [
         resolve: [
             {
                 token: 'workerEdit',
-                deps: [ui_router_ng2_1.Transition],
+                deps: [ui_router_ng2_1.Transition, worker_service_1.WorkerService],
                 resolveFn: function (trans, workerSvc) {
                     return workerSvc.getSingleWorker(trans.params().id);
                 }

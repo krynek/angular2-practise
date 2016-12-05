@@ -30,4 +30,7 @@ import { firebaseConfig } from './environments/firebase.config';
   	AppComponent 
   ]
 })
+/** 
+ * @module AppModule
+ */
 export class AppModule { }

@@ -11,48 +11,68 @@ import { IWorker } from './worker';
 
 @Injectable()
 export class WorkerService {
-	private _workerUrl = 'https://angular2practise.firebaseio.com/workers.json';
-	
-	constructor(private _http: Http, private db: AngularFireDatabase) {
+	private list = this._db.list('workers');
+
+/**
+ * @constructor
+ * @param {Http} - Http Service
+ * @param {AngularFireDatabase} - AngularFire2 Database
+ */
+	constructor(private _http: Http, private _db: AngularFireDatabase) {
 	}
 
-	// getWorkers(): Observable<IWorker[]> {
-	// 	return this._http.get(this._workerUrl)
-	// 		.map((response: Response) => <IWorker>response.json())
-	// 		.catch(this.handleError);
-	// }
-
-	// getWorker(id: number): Observable<IWorker> {
-	// 	return this.getWorkers()
-	// 		.map((workers: IWorker[]) => workers.find(w => w.id === id));
-	// }
-
-	// Firebase services
+/**
+ * Get worker list
+ * @return {Observable}
+ */
 	getAllWorkers(): Observable<IWorker[]> {
-		return this.db.list('workers')
+		return this.list
 	}
 
+/**
+ * Get single worker
+ * @param {any} id - The $key value
+ * @return {Observable}
+ */
 	getSingleWorker(id: any): Observable<any> {
-		return this.db.object('workers/' + id, { preserveSnapshot: true })
+		return this._db.object('workers/' + id, { preserveSnapshot: true })
 	}
 
-	addWorker(worker: any) {
-		return this.db.list('workers').push(worker);
+/**
+ * Add new worker
+ * @param {any} worker - The worker object
+ * @return {Promise}
+ */
+	addWorker(worker: IWorker) {
+		return this.list.push(worker);
   }
 
-	editWorker(worker: any, id: any) {
-		
-
-		// var updates = {};
-		// updates[id] = worker;
-
-		// return firebase.database().ref('workers').update(updates)
-		return this.db.list('workers').update(id, worker)
+/**
+ * Edit existing worker
+ * @param {any} worker - The worker object
+ * @param {any} id - The $key value
+ * @return {Promise}
+ */
+	editWorker(worker: IWorker, id: any) {
+		return this.list.update(id, worker)
   }
 
+/**
+ * Remove worker form list
+ * @param {any} id - The $key value
+ * @return {Promise}
+ */
+	removeWorker(id: any) {
+		return this.list.remove(id)
+	}
+
+/**
+ * Handle error
+ * @param {error}
+ * @return {Observable}
+ */
 	private handleError(error: Response) {
 		console.error(error);
 		return Observable.throw(error.json().error || 'Server Error');
 	}
-
 }

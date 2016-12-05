@@ -12,10 +12,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
+var ui_router_ng2_1 = require('ui-router-ng2');
 var worker_service_1 = require('../worker.service');
 var worker_1 = require('../worker');
+/**
+ * Worker Add/Edit Component
+ */
 var WorkerForm = (function () {
-    function WorkerForm(editObserver, _workerService) {
+    /**
+     * Inject "workerEdit" (resolve data)
+     * @param {Observable} editObserver
+     */
+    function WorkerForm(editObserver, _workerService, trans) {
         this.editObserver = editObserver;
         this._workerService = _workerService;
         this.departments = ['Human Resources', 'Legal', 'Services', 'Sales', 'Marketing'];
@@ -23,7 +31,13 @@ var WorkerForm = (function () {
         this.submitted = false;
         this.hasDepartmentError = false;
         this.editFlag = false;
+        this.currId = trans.params().id;
     }
+    /**
+     * Submit form
+     * Call "WorkerService" method to add worker
+     * @param {NgForm} form
+     */
     WorkerForm.prototype.submitForm = function (form) {
         this.submitted = true;
         console.log(form.value);
@@ -34,6 +48,10 @@ var WorkerForm = (function () {
             this._workerService.addWorker(this.model).then(function (_) { return console.log('Success'); }, function (err) { return console.log('Error'); });
         }
     };
+    /**
+       * Subscribe "editObserver" to get data from Firebase
+     * Using original snapshot to get $key value
+       */
     WorkerForm.prototype.ngOnInit = function () {
         var _this = this;
         if (typeof this.currId !== 'undefined' || this.currId != null) {
@@ -43,8 +61,11 @@ var WorkerForm = (function () {
                     _this.currId = snapshot.key;
             }, function (error) { return _this.errorMessage = error; });
         }
-        console.log(this.model);
     };
+    /**
+     * Validate select
+     * @param {string} value
+     */
     WorkerForm.prototype.validateDepartments = function (value) {
         if (value === 'default')
             this.hasDepartmentError = true;
@@ -58,7 +79,7 @@ var WorkerForm = (function () {
             templateUrl: 'app/workers/form/worker-form.component.html'
         }),
         __param(0, core_1.Inject('workerEdit')), 
-        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService])
+        __metadata('design:paramtypes', [Object, worker_service_1.WorkerService, ui_router_ng2_1.Transition])
     ], WorkerForm);
     return WorkerForm;
 }());
